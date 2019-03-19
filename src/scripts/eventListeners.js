@@ -1,9 +1,10 @@
+import dataManager from "./dataMgr"
 // ************************
 // Event Listeners Go Here
 // ************************
 
 // New Enter Fillup
-// click gathers data when all fields are populated
+// click gathers data when all fields are populated and clears entry fields
 const container = document.querySelector("#newEntry")
 
 document.querySelector("#newEnter").addEventListener("click", (event) => {
@@ -16,18 +17,30 @@ document.querySelector("#newEnter").addEventListener("click", (event) => {
         <section>
             <p>Last Entry</p>
             <p>${currentDate.innerHTML}</p>
-            <p>${currentMiles}</p>
-            <p>${currentPrice}</p>
-            <p>${currentGallons}</p>
-            <p>${currentCost}</p>
+            <p>Current Miles: ${currentMiles}</p>
+            <p>Price per Gallon: ${currentPrice}</p>
+            <p>Gallons: ${currentGallons}</p>
+            <p>Total Price: ${currentCost}</p>
         </section>
-    `
+        `
+        const newFillup = {
+        Date: `${currentDate.innerHTML}`,
+        Miles: `${currentMiles}`,
+        Price: `${currentPrice}`,
+        Gallons: `${currentGallons}`
+        }
+        // push to session storage http://localhost:3000/dataFile and clear entries
+        dataManager.saveEntry(newFillup).then (() => {
+        document.getElementById("currentMiles").value = "";
+        document.getElementById("currentPrice").value = "";
+        document.getElementById("currentGallons").value = "";}
+        )
 }),
 
 
 // New Clear Fillup
 // click clears all fields
-document.querySelector("#newClear").addEventListener("click", (e) => {
+document.querySelector("#newClear").addEventListener("click", (event) => {
     console.log("Clear was clicked")
         function ClearFields() {
         document.getElementById("currentMiles").value = "";
