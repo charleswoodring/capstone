@@ -69,6 +69,27 @@
       "Price": "3.239",
       "Gallons": "12.319",
       "id": 9
+    },
+    {
+      "Date": "Wed Mar 20 2019",
+      "Miles": "123456",
+      "Price": "2.333",
+      "Gallons": "21.999",
+      "id": 10
+    },
+    {
+      "Date": "Wed Mar 20 2019",
+      "Miles": "765432",
+      "Price": "3.699",
+      "Gallons": "11.111",
+      "id": 11
+    },
+    {
+      "Date": "Wed Mar 20 2019",
+      "Miles": "111111",
+      "Price": "2.699",
+      "Gallons": "31.222",
+      "id": 12
     }
   ]
 }

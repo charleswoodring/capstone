@@ -1,4 +1,10 @@
 /*
+MILES = current odometer - previous odometer
+COST = Price * Gallons
+MPG = Miles / Gallons
+COST PER MILE = Price / MPG
+MILES PER DOLLAR = MPG / Price
+
 1. From the Home Screen, the user is presented with two buttons, "New" and "History".
 
 2. From the Home Screen, given the user wants to enter a new fill up.
