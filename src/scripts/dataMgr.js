@@ -1,4 +1,4 @@
-const dataManager = {
+const dataManager =  {
 saveEntry: (newFillup) => {
     return fetch("http://localhost:3000/fillups", {
         method: "POST",
@@ -7,6 +7,10 @@ saveEntry: (newFillup) => {
         },
         body: JSON.stringify(newFillup)
     }).then(newFillup  => newFillup.json())
-}
-}
+},
+fetchFillups: function()  {
+    return fetch("http://localhost:3000/fillups")
+    .then(Response => Response.json())
+    }
+    }
 export default dataManager

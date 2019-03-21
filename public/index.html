@@ -10,7 +10,7 @@
 
 <body>
     <article id="newFillup" class="output">
-        <h1>Fancy Fuel Logo Here</h1>
+        <h1>MPG-Trakkr</h1>
         <!--
             Home Screen
         -->
@@ -26,21 +26,29 @@
             <input id="currentMiles" type="int" autofocus maxlength="6" pattern="[0-9]"></input>
         </section>
         <section id=newEntryPrice>
-            <!-- currency format 2 decimals-->
+            <!-- currency format 3 decimals-->
             <label class="label" for="currentPrice">Price:</label>
-            <input id="currentPrice" type="int" pattern="[0-9]"></input>
+            <input id="currentPrice" type="int" maxlength="5" pattern="[0-9]"></input>
         </section>
         <section id=newEntryGallons>
             <!-- number format 3 decimals-->
             <label class="label" for="currentGallons">Gallons:</label>
-            <input id="currentGallons" type="int" pattern="[0-9]"></input>
+            <input id="currentGallons" type="int" maxlength="6" pattern="[0-9]"></input>
         </section>
         <button id=newEnter>Enter</button>
         <button id=newClear>Clear</button>
         <button id=newHistory>History</button>
     </article>
-    <article id="newEntry"></article>
-
+    <!--
+        History Screen
+    -->
+    <article id="history">
+    <h1>MPG-Trakkr</h1>
+    <h2>History</h2>
+    <button id=homeButton>Home</button>
+    </article>
+    <!-- rename new entry to output to dom or something-->
+    <article id="newEntry" class="output"></article>
     <script src="bundle.js"></script>
 </body>
 
