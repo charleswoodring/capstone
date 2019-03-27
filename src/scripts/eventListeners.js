@@ -59,18 +59,46 @@ const historyContainer = document.querySelector("#history")
 
 document.querySelector("#newHistory").addEventListener("click", (e) => {
     // console.log("History was clicked")
+    function clearDOM () {
+        let x = document.getElementById("home")
+        x.style.display = "none"
+    }
+    clearDOM()
+    clearDOM()
+
     dataManager.fetchFillups().then((
         myParsedHistory => {
-            console.table(myParsedHistory)
+            for (let i = 0; i < myParsedHistory.length; i++) {
+                if (i != 0) {
+                    myParsedHistory[i].tankMiles = myParsedHistory[i].Miles -
+                    myParsedHistory[i - 1].Miles;
+                }
+                // console.table(myParsedHistory)
+            }
             myParsedHistory.forEach(history => {
-                historyContainer.innerHTML += `
+                if (history.tankMiles) {
+                let intGallons = parseInt(history.Gallons)
+                let roundGallons = Math.round(intGallons)
+                let MPG = history.tankMiles / roundGallons
+                let roundMPG = Math.round(MPG)
+                let deciMPG = roundMPG.toFixed(2);
+                // console.log(intGallons)
+                // console.log(intGallons)
+                console.log(roundGallons)
+                // console.log(history.tankMiles)
+                // console.log(MPG)
+                    historyContainer.innerHTML += `
                     <section>
+                    <p>-----------------------------------------------------</p>
                     <p>Date: ${history.Date}</p>
-                    <p>Miles: ${history.Miles}</p>
-                    <p>Price: ${history.Price}</p>
+                    <p>Miles: ${history.tankMiles}</p>
                     <p>Gallons: ${history.Gallons}</p>
+                    <p>Price: $${history.Price}</p>
+                    <p>Cost: $${(history.Price * history.Gallons).toFixed(2)}</p>
+                    <p>MPG:${(MPG).toFixed(2)}</p>
                     </section>
                     `
+                }
                 })
             })
             )
@@ -78,6 +106,14 @@ document.querySelector("#newHistory").addEventListener("click", (e) => {
 // ***************************************************
 // History cancel
 // click returns to new entry screen
+// document.querySelector("#homeButton").addEventListener("click", (event) => {
+// function clearDOM () {
+//     let x = document.getElementById("history")
+//     x.style.display = "none"
+// }
+//     clearDOM()
+// }
+
 // ***************************************************
         // History delete
 // click shows alert box to confirm
@@ -97,5 +133,3 @@ document.querySelector("#newHistory").addEventListener("click", (e) => {
 // History edit alert
 // click yes to update datafile
 // click no to return to History
-
-

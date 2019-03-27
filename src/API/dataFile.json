@@ -1,13 +1,6 @@
 {
   "fillups": [
     {
-      "Date": "Tue Jan 01 2019",
-      "Miles": "000000",
-      "Price": "0.000",
-      "Gallons": "00.000",
-      "id": 0
-    },
-    {
       "Date": "Tue Mar 19 2019",
       "Miles": "100625",
       "Price": "3.509",
@@ -69,6 +62,34 @@
       "Price": "3.239",
       "Gallons": "12.319",
       "id": 9
+    },
+    {
+      "Date": "Thu Mar 21 2019",
+      "Miles": "103111",
+      "Price": "2.299",
+      "Gallons": "15.689",
+      "id": 10
+    },
+    {
+      "Date": "Thu Mar 21 2019",
+      "Miles": "103400",
+      "Price": "2.139",
+      "Gallons": "16.211",
+      "id": 11
+    },
+    {
+      "Date": "Thu Mar 21 2019",
+      "Miles": "103600",
+      "Price": "2.489",
+      "Gallons": "13.678",
+      "id": 12
+    },
+    {
+      "Date": "Thu Mar 21 2019",
+      "Miles": "143000",
+      "Price": "2.159",
+      "Gallons": "13.222",
+      "id": 13
     }
   ]
 }
