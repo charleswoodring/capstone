@@ -10,50 +10,51 @@
 
 <body>
     <div id=home>
-    <article id="newFillup" class="output">
-        <h1>MPG-Trakkr</h1>
-        <!--
+        <article id="newFillup" class="output">
+            <h1>MPG-Trakkr</h1>
+            <!--
             Home Screen
         -->
-        <section id=newEntryDate>
-            <p id="currentDate">Date:</p>
-            <script>
-                let d = new Date();
-                document.getElementById("currentDate").innerHTML = d.toDateString()
-            </script>
-        </section>
-        <section id=newEntryMiles>
-            <label class="label" for="currentMiles">Miles:</label>
-            <input id="currentMiles" type="int" autofocus maxlength="6" pattern="[0-9]"></input>
-        </section>
-        <section id=newEntryPrice>
-            <!-- currency format 3 decimals-->
-            <label class="label" for="currentPrice">Price:</label>
-            <input id="currentPrice" type="int" maxlength="5" pattern="[0-9]"></input>
-        </section>
-        <section id=newEntryGallons>
-            <!-- number format 3 decimals-->
-            <label class="label" for="currentGallons">Gallons:</label>
-            <input id="currentGallons" type="int" maxlength="6" pattern="[0-9]"></input>
-        </section>
-        <button id=newEnter>Enter</button>
-        <button id=newClear>Clear</button>
-        <button id=newHistory>History</button>
-    </article>
-</div>
+            <section id=newEntryDate>
+                <p id="currentDate">Date:</p>
+                <script>
+                    let d = new Date();
+                    document.getElementById("currentDate").innerHTML = d.toDateString()
+                </script>
+            </section>
+            <section id=newEntryMiles>
+                <label class="label" for="currentMiles">Miles:</label>
+                <input id="currentMiles" type="int" autofocus maxlength="6" pattern="[0-9]"></input>
+            </section>
+            <section id=newEntryPrice>
+                <!-- currency format 3 decimals-->
+                <label class="label" for="currentPrice">Price:</label>
+                <input id="currentPrice" type="int" maxlength="5" pattern="[0-9]"></input>
+            </section>
+            <section id=newEntryGallons>
+                <!-- number format 3 decimals-->
+                <label class="label" for="currentGallons">Gallons:</label>
+                <input id="currentGallons" type="int" maxlength="6" pattern="[0-9]"></input>
+            </section>
+            <button id=newEnter>Enter</button>
+            <button id=newClear>Clear</button>
+            <button id=newHistory>History</button>
+            </section>
+            <section id=lastEntry>
+            </section>
+        </article>
+    </div>
     <!--
         History Screen
     -->
     <div id=history>
-    <article id="history">
-    <h1>MPG-Trakkr</h1>
-    <h2>History</h2>
-    <button id=homeButton>Home</button>
-    </article>
-</div>
+        <article id="history"></article>
+    </div>
 
     <!-- rename new entry to output to dom or something-->
     <article id="newEntry" class="output"></article>
+    <article id="history" class="output"></article>
+    <article id="lastEntry" class="output"></article>
     <script src="bundle.js"></script>
 </body>
 

@@ -9,13 +9,6 @@
     },
     {
       "Date": "Tue Mar 19 2019",
-      "Miles": "100925",
-      "Price": "3.459",
-      "Gallons": "16.012",
-      "id": 2
-    },
-    {
-      "Date": "Tue Mar 19 2019",
       "Miles": "101123",
       "Price": "3.599",
       "Gallons": "12.111",
@@ -72,24 +65,10 @@
     },
     {
       "Date": "Thu Mar 21 2019",
-      "Miles": "103400",
+      "Miles": "103412",
       "Price": "2.139",
       "Gallons": "16.211",
       "id": 11
-    },
-    {
-      "Date": "Thu Mar 21 2019",
-      "Miles": "103600",
-      "Price": "2.489",
-      "Gallons": "13.678",
-      "id": 12
-    },
-    {
-      "Date": "Thu Mar 21 2019",
-      "Miles": "143000",
-      "Price": "2.159",
-      "Gallons": "13.222",
-      "id": 13
     }
   ]
 }
