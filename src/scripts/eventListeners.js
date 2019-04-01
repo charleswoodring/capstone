@@ -16,34 +16,62 @@ document.querySelector("#newEnter").addEventListener("click", (event) => {
     const currentGallons = document.querySelector("#currentGallons").value
     const currentCost = (currentPrice * currentGallons)
     // Clear current DOM
-    newContainer.innerHTML = ""
+    // newContainer.innerHTML = ""
     // Display on DOM
-    newContainer.innerHTML += `
-    <section>
-    <h2>Last Entry</h2>
-    <p>${currentDate.innerHTML}</p>
-    <p>Current Miles: ${currentMiles}</p>
-            <p>Price per Gallon: ${currentPrice}</p>
-            <p>Gallons: ${currentGallons}</p>
-            <p>Total Price: ${currentCost}</p>
-            </section>
-        `
-        // Create fields for JSON
-        const newFillup = {
+    // newContainer.innerHTML += `
+    // Create fields for JSON
+    const newFillup = {
         Date: `${currentDate.innerHTML}`,
         Miles: `${currentMiles}`,
         Price: `${currentPrice}`,
         Gallons: `${currentGallons}`
     }
-        // push to session storage http://localhost:3000/fillups then clear entries
-        dataManager.saveEntry(newFillup).then (() => {
+    // push to session storage http://localhost:3000/fillups then clear entries
+    dataManager.saveEntry(newFillup).then(() => {
         document.getElementById("currentMiles").value = "";
         document.getElementById("currentPrice").value = "";
-        document.getElementById("currentGallons").value = "";}
-        )
-})
+        document.getElementById("currentGallons").value = "";
+    }
+    )
+    window.location.reload();
+}
+)
+//  Working on last entry static display
+//
+//
+const lastEntryContainer = document.querySelector("#lastEntry")
+dataManager.fetchFillups().then(
+    myParsedEntry => {
+        for (let i = 0; i < myParsedEntry.length; i++) {
+            if (i != 0) {
+                // debugger
+                myParsedEntry[i].tankMiles = myParsedEntry[i]["Miles"] - myParsedEntry[i - 1]["Miles"];
+            }
+            // console.table(myParsedEntry)
+        }
+        myParsedEntry.forEach(history => {
+            if (history.tankMiles) {
+                let intGallons = parseInt(history.Gallons)
+                let roundGallons = Math.round(intGallons)
+                let MPG = history.tankMiles / history.Gallons
+                lastEntryContainer.innerHTML = `
+            <section>
+            <h3>Last Entry</h3>
+                    <p>Date: ${history.Date}</p>
+                    <p>Miles: ${history.tankMiles}</p>
+                    <p>Gallons: ${history.Gallons}</p>
+                    <p>Price: $${(history.Price * 1).toFixed(3)}</p>
+                    <p>Cost: $${(history.Price * history.Gallons).toFixed(2)}</p>
+                    <p>MPG:${(MPG).toFixed(2)}</p>
+            </section>
+            `
+            }
+        })
+    })
 
-
+//
+//
+//end of last entry diaplsy
 
 // New Clear Fillup
 // click clears all fields
@@ -62,7 +90,7 @@ document.querySelector("#newClear").addEventListener("click", (event) => {
 const historyContainer = document.querySelector("#history")
 document.querySelector("#newHistory").addEventListener("click", (e) => {
     console.log("History was clicked")
-    function clearDOM () {
+    function clearDOM() {
         let x = document.getElementById("home")
         x.style.display = "none"
     }
@@ -73,61 +101,69 @@ document.querySelector("#newHistory").addEventListener("click", (e) => {
             for (let i = 0; i < myParsedHistory.length; i++) {
                 if (i != 0) {
                     myParsedHistory[i].tankMiles = myParsedHistory[i].Miles -
-                    myParsedHistory[i - 1].Miles;
+                        myParsedHistory[i - 1].Miles;
                 }
 
-                console.table(myParsedHistory)
-            }historyContainer.innerHTML = `
+                // console.table(myParsedHistory)
+            } historyContainer.innerHTML = `
             <section>
             <h1>MPG-Trakkr</h1>
             <h2>History</h2>
             <button id=homeButton>Home</button>
             </section>
             `
+            myParsedHistory.reverse()
             myParsedHistory.forEach(history => {
                 if (history.tankMiles) {
-                let intGallons = parseInt(history.Gallons)
-                let roundGallons = Math.round(intGallons)
-                let MPG = history.tankMiles / roundGallons
+                    let intGallons = parseInt(history.Gallons)
+                    let roundGallons = Math.round(intGallons)
+                    let MPG = history.tankMiles / history.Gallons
                     historyContainer.innerHTML += `
                     <section>
                     <p>-----------------------------------------------------</p>
                     <p>Date: ${history.Date}</p>
                     <p>Miles: ${history.tankMiles}</p>
                     <p>Gallons: ${history.Gallons}</p>
-                    <p>Price: $${(history.Price * 1).toFixed(2)}</p>
+                    <p>Price: $${(history.Price * 1).toFixed(3)}</p>
                     <p>Cost: $${(history.Price * history.Gallons).toFixed(2)}</p>
                     <p>MPG:${(MPG).toFixed(2)}</p>
+                    <button id=editButton>Edit</button>
+                    <button id=${history.id} class=deleteButton>Delete</button>
                     </section>
                     `
                 }
                 document.querySelector("#homeButton").addEventListener("click", (event) => {
                     console.log("home was clicked")
-                function clearDOM () {
-                    let x = document.getElementById("history")
-                    x.style.display = "none"
-                }
-                    clearDOM()
+                    window.location.reload();
                 })
             })
-        })
-        )
-    })
+
+            //iterate over the arrray add event listener to each node
+
+                document.querySelectorAll(".deleteButton").forEach(
+                    function (deleteButton) {
+                        deleteButton.addEventListener("click", (event) => {
+                            console.log("delete was clicked")
+                            if (window.confirm("Delete, are you sure?")) {
+                                console.log("delete confirmed")
+                                    console.log(`http://localhost:3000/fillups/${event.target.id}`)
+                                    return fetch(`http://localhost:3000/fillups/${event.target.id}`, {
+                                        method: "DELETE"
+                                    }).then(Response => Response.json())
+                                    .then(window.location.reload());
+                              } else {
+                                console.log("delete cancelled")
+                              }
+                        })
+                    }
+                    )
+                            })
+            // document.querySelector("editButton").addEventListener("click", (event) =>
+            // console.log("edit was clicked")
+            // )
+    )
+})
     // ***************************************************
-// History cancel
-// click returns to new entry screen
-// document.querySelector("#homeButton").addEventListener("click", (event) => {
-//     console.log("home was clicked")
-// function clearDOM () {
-//     let x = document.getElementById("history")
-//     x.style.display = "none"
-// }
-//     clearDOM()
-//     newContainer()
-// })
-
-
-// ***************************************************
         // History delete
 // click shows alert box to confirm
 
