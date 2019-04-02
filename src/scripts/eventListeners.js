@@ -6,8 +6,11 @@ import dataManager from "./dataMgr"
 // New Enter Fillup
 // click gathers data when all fields are populated and clears entry fields
 // document.querySelector("#newHistory").addEventListener("click", (e) => {
+// const newContainer = document.querySelector("#newEntry")
+function refresh () {
+    window.location.reload();
+}
 
-const newContainer = document.querySelector("#newEntry")
 document.querySelector("#newEnter").addEventListener("click", (event) => {
 
     console.log("Enter was clicked")
@@ -28,14 +31,13 @@ document.querySelector("#newEnter").addEventListener("click", (event) => {
     }
     // push to session storage http://localhost:3000/fillups then clear entries
     dataManager.saveEntry(newFillup).then(() => {
-        document.getElementById("currentMiles").value = "";
-        document.getElementById("currentPrice").value = "";
-        document.getElementById("currentGallons").value = "";
+        refresh()
     }
     )
-    window.location.reload();
 }
 )
+
+
 //  Working on last entry static display
 //
 //
@@ -47,8 +49,8 @@ dataManager.fetchFillups().then(
                 // debugger
                 myParsedEntry[i].tankMiles = myParsedEntry[i]["Miles"] - myParsedEntry[i - 1]["Miles"];
             }
-            // console.table(myParsedEntry)
         }
+        // console.table(myParsedEntry)
         myParsedEntry.forEach(history => {
             if (history.tankMiles) {
                 let intGallons = parseInt(history.Gallons)
@@ -134,7 +136,7 @@ document.querySelector("#newHistory").addEventListener("click", (e) => {
                 }
                 document.querySelector("#homeButton").addEventListener("click", (event) => {
                     console.log("home was clicked")
-                    window.location.reload();
+                    refresh();
                 })
             })
 
@@ -150,7 +152,7 @@ document.querySelector("#newHistory").addEventListener("click", (e) => {
                                     return fetch(`http://localhost:3000/fillups/${event.target.id}`, {
                                         method: "DELETE"
                                     }).then(Response => Response.json())
-                                    .then(window.location.reload());
+                                    .then(refresh());
                               } else {
                                 console.log("delete cancelled")
                               }
