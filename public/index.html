@@ -50,11 +50,39 @@
     <div id=history>
         <article id="history"></article>
     </div>
+    <!--
+        Edit Screen
+    -->
+    <div id=edit style="display: none">
+        <article id="edit">
+        <h1>MPG-Trakkr</h1>
+        <h2>Edit Entry</h2>
+        <section id=Date>
+            <span id="editDate"></span>
+            <!-- <input id="editDate"></input> -->
+        </section>
+        <section id=Miles>
+            <label class="label" for="currentMiles">Miles:</label>
+            <input id="editMiles" type="int" autofocus maxlength="6" pattern="[0-9]"></input>
+        </section>
+        <section id=Price>
+            <label class="label" for="currentPrice">Price:</label>
+            <input id="editPrice" type="int" maxlength="5" pattern="[0-9]"></input>
+        </section>
+        <section id=Gallons>
+            <label class="label" for="currentGallons">Gallons:</label>
+            <input id="editGallons" type="int" maxlength="6" pattern="[0-9]"></input>
+        </section>
+        <button id=editSaveButton>Save</button>
+        <button id=editCancelButton>Cancel</button>
+    </article>
+    </div>
 
     <!-- rename new entry to output to dom or something-->
     <article id="newEntry" class="output"></article>
     <article id="history" class="output"></article>
     <article id="lastEntry" class="output"></article>
+    <article id="editEntry" class="output"></article>
     <script src="bundle.js"></script>
 </body>
 
