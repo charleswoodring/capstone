@@ -4,25 +4,20 @@ import dataManager from "./dataMgr"
 // ************************
 
 // New Enter Fillup
-// click gathers data when all fields are populated and clears entry fields
-// document.querySelector("#newHistory").addEventListener("click", (e) => {
-// const newContainer = document.querySelector("#newEntry")
-function refresh () {
+function refresh() {
     window.location.reload();
 }
-
+// ******************************************
+// ** NEW ENTRY
+// ******************************************
 document.querySelector("#newEnter").addEventListener("click", (event) => {
 
     console.log("Enter was clicked")
     const currentMiles = document.querySelector("#currentMiles").value
     const currentPrice = document.querySelector("#currentPrice").value
     const currentGallons = document.querySelector("#currentGallons").value
-    const currentCost = (currentPrice * currentGallons)
-    // Clear current DOM
-    // newContainer.innerHTML = ""
-    // Display on DOM
-    // newContainer.innerHTML += `
-    // Create fields for JSON
+    // const currentCost = (currentPrice * currentGallons)
+
     const newFillup = {
         Date: `${currentDate.innerHTML}`,
         Miles: `${currentMiles}`,
@@ -32,15 +27,16 @@ document.querySelector("#newEnter").addEventListener("click", (event) => {
     // push to session storage http://localhost:3000/fillups then clear entries
     dataManager.saveEntry(newFillup).then(() => {
         refresh()
-    }
-    )
+    })
 }
 )
+// ******************************************
+// ** END NEW ENTRY
+// ******************************************
 
-
-//  Working on last entry static display
-//
-//
+// ******************************************
+// ** DISPLAY LAST ENTRY
+// ******************************************
 const lastEntryContainer = document.querySelector("#lastEntry")
 dataManager.fetchFillups().then(
     myParsedEntry => {
@@ -70,13 +66,13 @@ dataManager.fetchFillups().then(
             }
         })
     })
+// ******************************************
+// ** END DISPLAY LAST ENTRY
+// ******************************************
 
-//
-//
-//end of last entry diaplsy
-
-// New Clear Fillup
-// click clears all fields
+// ******************************************
+// ** CLEAR ENTRY FIELDS
+// ******************************************
 document.querySelector("#newClear").addEventListener("click", (event) => {
     console.log("Clear was clicked")
     function ClearFields() {
@@ -86,9 +82,13 @@ document.querySelector("#newClear").addEventListener("click", (event) => {
     }
     ClearFields()
 })
+// ******************************************
+// ** END CLEAR ENTRY FIELDS
+// ******************************************
 
-// New history
-// click displays history data
+// ******************************************
+// ** DISPLAY HISTORY
+// ******************************************
 const historyContainer = document.querySelector("#history")
 document.querySelector("#newHistory").addEventListener("click", (e) => {
     console.log("History was clicked")
@@ -97,7 +97,7 @@ document.querySelector("#newHistory").addEventListener("click", (e) => {
         x.style.display = "none"
     }
     clearDOM()
-
+//start history function
     dataManager.fetchFillups().then((
         myParsedHistory => {
             for (let i = 0; i < myParsedHistory.length; i++) {
@@ -129,7 +129,7 @@ document.querySelector("#newHistory").addEventListener("click", (e) => {
                     <p>Price: $${(history.Price * 1).toFixed(3)}</p>
                     <p>Cost: $${(history.Price * history.Gallons).toFixed(2)}</p>
                     <p>MPG:${(MPG).toFixed(2)}</p>
-                    <button id=editButton>Edit</button>
+                    <button id=${history.id} class=editButton>Edit</button>
                     <button id=${history.id} class=deleteButton>Delete</button>
                     </section>
                     `
@@ -139,48 +139,79 @@ document.querySelector("#newHistory").addEventListener("click", (e) => {
                     refresh();
                 })
             })
+            //end history function
+// ******************************************
+// ** END DISPLAY HISTORY
+// ******************************************
 
-            //iterate over the arrray add event listener to each node
+// ******************************************
+// ** DELETE ENTRY FROM HISTORY
+// ******************************************
 
-                document.querySelectorAll(".deleteButton").forEach(
-                    function (deleteButton) {
-                        deleteButton.addEventListener("click", (event) => {
-                            console.log("delete was clicked")
-                            if (window.confirm("Delete, are you sure?")) {
-                                console.log("delete confirmed")
-                                    console.log(`http://localhost:3000/fillups/${event.target.id}`)
-                                    return fetch(`http://localhost:3000/fillups/${event.target.id}`, {
-                                        method: "DELETE"
-                                    }).then(Response => Response.json())
-                                    .then(refresh());
-                              } else {
-                                console.log("delete cancelled")
-                              }
-                        })
-                    }
-                    )
-                            })
-            // document.querySelector("editButton").addEventListener("click", (event) =>
-            // console.log("edit was clicked")
-            // )
+            document.querySelectorAll(".deleteButton").forEach(
+                function (deleteButton) {
+                    deleteButton.addEventListener("click", (event) => {
+                        console.log("delete was clicked")
+                        if (window.confirm("Delete, are you sure?")) {
+                            console.log("delete confirmed")
+                            console.log(`http://localhost:3000/fillups/${event.target.id}`)
+                            return fetch(`http://localhost:3000/fillups/${event.target.id}`, {
+                                method: "DELETE"
+                            }).then(Response => Response.json())
+                                .then(refresh());
+                        } else {
+                            console.log("delete cancelled")
+                        }
+                    })
+                }
+            )
+// ******************************************
+// ** END DELETE ENTRY FROM HISTORY
+// ******************************************
+
+// ******************************************
+// ** EDIT ENTRY FROM HISTORY
+// ******************************************
+            // debugger
+            document.querySelectorAll(".editButton").forEach(
+                function (editButton) {
+                    editButton.addEventListener("click", (event) => {
+                        console.log("Edit was clicked")
+                        function clearDOM() {
+                            let x = document.getElementById("history")
+                            x.style.display = "none"
+                        }
+                        clearDOM()
+                        // console.table(`http://localhost:3000/fillups/${event.target.id}`)
+                        document.querySelector("#edit").style.display = "block"
+                        dataManager.editEntry(event.target.id).then(
+                            (edit) => {
+                                document.querySelector("#editDate").innerHTML=`Date: ${edit.Date}`
+                                document.querySelector("#editMiles").value=edit.Miles
+                                document.querySelector("#editPrice").value=edit.Price
+                                document.querySelector("#editGallons").value=edit.Gallons
+
+                            }
+                            )
+
+                    })
+                }
+            )
+            document.querySelector("#editCancelButton").addEventListener("click", (event) => {
+                console.log("Edit Cancel was clicked")
+                // refresh();
+            })
+            document.querySelector("#editSaveButton").addEventListener("click", (event) => {
+                console.log("Edit Save was clicked")
+                // push to json and refresh;
+            })
+        })
     )
 })
-    // ***************************************************
-        // History delete
-// click shows alert box to confirm
-
-// History delete alert
-// click yes to delete and remove from datafile
-// click no to return to history
-
-// ***************************************************
-
+// ******************************************
+// ** END EDIT ENTRY FROM HISTORY
+// ******************************************
 // History edit
 // click displays user input for editing
-
-// History edit save
-// click shows alert box to confirm
-
-// History edit alert
-// click yes to update datafile
-// click no to return to History
+// click SAVE to update datafile and reload
+// click CANCEL to return to History

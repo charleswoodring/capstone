@@ -12,6 +12,10 @@ saveEntry: (newFillup) => {
 fetchFillups: function()  {
     return fetch("http://localhost:3000/fillups")
     .then(Response => Response.json())
+    },
+editEntry: function(id)  {
+    return fetch(`http://localhost:3000/fillups/${id}`)
+    .then(Response => Response.json())
     }
     }
 export default dataManager
