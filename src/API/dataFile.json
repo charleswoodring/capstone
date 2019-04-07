@@ -8,74 +8,60 @@
       "id": 1
     },
     {
-      "Date": "Tue Mar 19 2019",
-      "Miles": "101123",
-      "Price": "3.599",
+      "Date": "Tue Mar 20 2019",
+      "Miles": "100999",
+      "Price": "3.609",
       "Gallons": "12.111",
       "id": 3
     },
     {
-      "Date": "Tue Mar 19 2019",
+      "Date": "Tue Mar 21 2019",
       "Miles": "101400",
       "Price": "2.229",
       "Gallons": "14.222",
       "id": 4
     },
     {
-      "Date": "Tue Mar 19 2019",
+      "Date": "Tue Mar 22 2019",
       "Miles": "101712",
       "Price": "2.699",
       "Gallons": "13.986",
       "id": 5
     },
     {
-      "Date": "Tue Mar 19 2019",
+      "Date": "Tue Mar 23 2019",
       "Miles": "102043",
       "Price": "2.229",
       "Gallons": "12.324",
       "id": 6
     },
     {
-      "Date": "Tue Mar 19 2019",
+      "Date": "Tue Mar 24 2019",
       "Miles": "102333",
       "Price": "2.399",
       "Gallons": "12.559",
       "id": 7
     },
     {
-      "Date": "Tue Mar 19 2019",
-      "Miles": "102543",
-      "Price": "3.129",
-      "Gallons": "8.321",
+      "Date": "Tue Mar 25 2019",
+      "Miles": "102540",
+      "Price": "3.019",
+      "Gallons": "8.125",
       "id": 8
     },
     {
-      "Date": "Wed Mar 20 2019",
-      "Miles": "102705",
-      "Price": "3.109",
-      "Gallons": "10.584",
+      "Date": "Wed Mar 26 2019",
+      "Miles": "102933",
+      "Price": "2.329",
+      "Gallons": "10.000",
       "id": 9
     },
     {
-      "Date": "Date: Date: Thu Apr 04 2019",
-      "Miles": "103070",
-      "Price": "3.259",
-      "Gallons": "12.500",
+      "Date": "Sun Apr 07 2019",
+      "Miles": "103156",
+      "Price": "2.129",
+      "Gallons": "10.524",
       "id": 10
-    },
-    {
-      "Date": "Thu Apr 04 2019",
-      "Miles": "103400",
-      "Price": "3.099",
-      "Gallons": "16.632",
-      "id": 11
-    },
-    {
-      "Date": "Thu Apr 04 2019",
-      "Miles": "103725",
-      "Price": "2.699",
-      "Gallons": "10.236",
-      "id": 12
     }
   ]
 }

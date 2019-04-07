@@ -1,5 +1,7 @@
 import dataManager from "./dataMgr"
 import displayHistory from "./displayHistory"
+import deleteButton from "./deleteEntry"
+import editButton from "./editEntry"
 // ************************
 // Event Listeners Go Here
 // ************************
@@ -102,91 +104,33 @@ document.querySelector("#newHistory").addEventListener("click", () => {
 // ******************************************
 // ** DELETE ENTRY FROM HISTORY
 // ******************************************
+    // listen for click on entire history page
+    document.querySelector("#history").addEventListener("click", (event) => {
+    // check the target of the click to the delete button
+        if (event.target.className === "deleteButton") {
+    // delete the specific id of the target
+        deleteButton(event.target.id)
+        }
+    })
+// ******************************************
+// ** END DELETE ENTRY FROM HISTORY
+// ******************************************
 
-            document.querySelectorAll(".deleteButton").forEach(
-                function (deleteButton) {
-                    deleteButton.addEventListener("click", (event) => {
-                        console.log("delete was clicked")
-                        if (window.confirm("Delete, are you sure?")) {
-                            console.log("delete confirmed")
-                            console.log(`http://localhost:3000/fillups/${event.target.id}`)
-                            return fetch(`http://localhost:3000/fillups/${event.target.id}`, {
-                                method: "DELETE"
-                            }).then(Response => Response.json())
-                                .then(refresh());
-                        } else {
-                            console.log("delete cancelled")
-                        }
-                    })
-                }
-            )
-            // ******************************************
-            // ** END DELETE ENTRY FROM HISTORY
-            // ******************************************
-
-            // ******************************************
-            // ** EDIT ENTRY FROM HISTORY
-            // ******************************************
-            document.querySelectorAll(".editButton").forEach(
-                function (editButton) {
-                    editButton.addEventListener("click", (event) => {
-                        console.log("Edit was clicked")
-                        // Clear history page to display only the edit page
-                        function clearDOM() {
-                            let x = document.getElementById("history")
-                            x.style.display = "none"
-                        }
-                        clearDOM()
-                        // displays the edit page from html
-                        document.querySelector("#edit").style.display = "block"
-                        // GET specific object to be edited (function in dataMgr)
-                        dataManager.editEntry(event.target.id)
-                            // Target empty html fields and place correct values in each
-                            .then(
-                                (objectToEdit) => {
-                                    document.querySelector("#editDate").innerHTML = `Date: ${objectToEdit.Date}`
-                                    document.querySelector("#editID").value = objectToEdit.id
-                                    document.querySelector("#editMiles").value = objectToEdit.Miles
-                                    document.querySelector("#editPrice").value = objectToEdit.Price
-                                    document.querySelector("#editGallons").value = objectToEdit.Gallons
-
-                                }
-                            )
-                    })
-                }
-            )
-            document.querySelector("#editCancelButton").addEventListener("click", () => {
-                console.log("Edit Cancel was clicked")
-                displayHistory();
-            })
-            // ******************************************
-            // SAVE EDITED OBJECT
-            // ******************************************
-            document.querySelector("#editSaveButton").addEventListener("click", () => {
-                console.log("Edit Save was clicked")
-                // grab input (#xxx) values store them in variables (const xxx)
-                const editdDate = document.querySelector("#editDate").innerHTML
-                const editedMiles = document.querySelector("#editMiles").value
-                const editedPrice = document.querySelector("#editPrice").value
-                const editedGallons = document.querySelector("#editGallons").value
-
-                // create new object (const xxx) using variables declared above (const ###)
-                const editedFillup = {
-                    Date: `${editdDate}`,
-                    Miles: `${editedMiles}`,
-                    Price: `${editedPrice}`,
-                    Gallons: `${editedGallons}`
-                }
-                // replace object with matching ID in json
-                const idToEdit = document.querySelector("#editID").value
-                dataManager.saveEdit(idToEdit, editedFillup)
-                .then(displayHistory())
-            })
-        // })
-    // )
-})
+// ******************************************
+// ** EDIT ENTRY FROM HISTORY
+// ******************************************
+document.querySelector("#history").addEventListener("click", (event) => {
+    // check the target of the click to the edit button
+    if (event.target.className === "editButton") {
+    // edit the specific id of the target
+        editButton(event.target.id)
+        }
+    })
+    })
     // ******************************************
     // ** END EDIT ENTRY FROM HISTORY
     // ******************************************
     // click SAVE to reload History
     // click CANCEL to return to History
+
+    export default refresh
