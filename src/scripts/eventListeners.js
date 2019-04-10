@@ -5,21 +5,23 @@ import editButton from "./editEntry"
 // ************************
 // Event Listeners Go Here
 // ************************
-
-// New Enter Fillup
+//Function to reload home screen
 function refresh() {
     window.location.reload();
 }
+//Function to hide home screen
+function clearHome() {
+    let x = document.getElementById("home")
+    x.style.display = "none"
+}
+// New Enter Fillup
 // ******************************************
 // ** NEW ENTRY
 // ******************************************
 document.querySelector("#newEnter").addEventListener("click", () => {
-
-    console.log("Enter was clicked")
     const currentMiles = document.querySelector("#currentMiles").value
     const currentPrice = document.querySelector("#currentPrice").value
     const currentGallons = document.querySelector("#currentGallons").value
-    // const currentCost = (currentPrice * currentGallons)
 
     const newFillup = {
         Date: `${currentDate.innerHTML}`,
@@ -48,7 +50,6 @@ dataManager.fetchFillups().then(
                 myParsedEntry[i].tankMiles = myParsedEntry[i]["Miles"] - myParsedEntry[i - 1]["Miles"];
             }
         }
-        // console.table(myParsedEntry)
         myParsedEntry.forEach(history => {
             if (history.tankMiles) {
                 let MPG = history.tankMiles / history.Gallons
@@ -74,7 +75,6 @@ dataManager.fetchFillups().then(
 // ** CLEAR ENTRY FIELDS
 // ******************************************
 document.querySelector("#newClear").addEventListener("click", () => {
-    console.log("Clear was clicked")
     function ClearFields() {
         document.getElementById("currentMiles").value = "";
         document.getElementById("currentPrice").value = "";
@@ -90,13 +90,9 @@ document.querySelector("#newClear").addEventListener("click", () => {
 // ** DISPLAY HISTORY
 // ******************************************
 document.querySelector("#newHistory").addEventListener("click", () => {
-    console.log("History was clicked")
-    function clearDOM() {
-        let x = document.getElementById("home")
-        x.style.display = "none"
-    }
-    clearDOM()
+    clearHome()
     displayHistory()
+})
 // ******************************************
 // ** END DISPLAY HISTORY
 // ******************************************
@@ -126,11 +122,8 @@ document.querySelector("#history").addEventListener("click", (event) => {
         editButton(event.target.id)
         }
     })
-    })
     // ******************************************
     // ** END EDIT ENTRY FROM HISTORY
     // ******************************************
-    // click SAVE to reload History
-    // click CANCEL to return to History
 
     export default refresh
