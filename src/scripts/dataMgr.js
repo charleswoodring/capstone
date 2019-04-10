@@ -1,6 +1,5 @@
 const dataManager = {
     saveEntry: (newFillup) => {
-        console.log("added new")
         return fetch("http://localhost:3000/fillups", {
             method: "POST",
             headers: {
